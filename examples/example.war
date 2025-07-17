@@ -1,0 +1,91 @@
+shout "Enemy spotted!"
+
+enlist soldiers = 100
+enlist ammo = soldiers amplify 5
+enlist used_ammo = ammo decimate 4 
+enlist remaining = soldiers expend 10 
+shout "Forces: " reinforce soldiers reinforce ", Ammo: " reinforce remaining
+
+recon soldiers outranks 50:
+    shout "Sufficient troops!"
+secure.
+
+recon soldiers is equal to 100:
+    shout "Exactly 100 soldiers confirmed"
+secure.
+
+enlist has_air = 1
+enlist has_ground = 1
+recon has_air and also has_ground:
+    shout "Full support available!"
+secure.
+
+enlist threat = 3
+recon threat outranks 5:
+    shout "High threat!"
+else recon threat outranks 2:
+    shout "Medium threat detected"
+fallback position:
+    shout "Low threat"
+secure.
+
+mission calculate_losses with initial, casualties:
+    enlist remaining = initial expend casualties
+    report remaining
+retreat.
+
+mission get_status:
+    report "All clear"
+retreat.
+
+enlist survivors = execute calculate_losses with 100, 15
+enlist status = execute get_status
+shout "Survivors: " reinforce survivors
+shout "Status: " reinforce status
+
+enlist countdown = 3
+while under siege countdown outranks 0:
+    shout "T-minus " reinforce countdown
+    countdown = countdown expend 1
+break siege.
+
+enlist name = interrogate "Enter commander name: "
+shout "Welcome, Commander " reinforce name
+
+// Array and for-each demonstration
+enlist units = ["Alpha", "Bravo", "Charlie"]
+shout "Unit roll call:"
+patrol through unit in units:
+    shout "- " reinforce unit reinforce " reporting for duty"
+end patrol.
+
+shout "Mission complete!"
+
+enlist arr = [1, 2, 3]
+enlist mixed = ["Alpha", 100]
+shout "First: " reinforce arr[0]
+shout "Second: " reinforce mixed[1]
+
+// Array assignment
+arr[1] = 99
+shout "Modified: " reinforce arr
+
+// Array length
+shout "Length: " reinforce execute headcount with arr
+
+// Deploy (add to end)
+execute deploy with arr, 4
+shout "After deploy: " reinforce arr
+
+// Extract (remove from end)
+enlist popped = execute extract with arr
+shout "Extracted: " reinforce popped
+
+// Reinforce at position (insert)
+execute reinforce_at with arr, 1, 50
+shout "After reinforce: " reinforce arr
+
+// Evacuate from position (remove)
+enlist removed = execute evacuate_at with arr, 2
+shout "Evacuated: " reinforce removed
+shout "Final: " reinforce arr

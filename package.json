@@ -1,0 +1,19 @@
+{
+  "name": "warlanguage",
+  "version": "1.0.0",
+  "description": "A war-themed esoteric programming language.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "esolang",
+    "interpreter",
+    "parser"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
+}
